@@ -44,11 +44,24 @@ class QuestionDetailView(APIView):
         """
         try:
             question = Question.objects.get(id=id)
-            serializer = QuestionSerializer(question)
-            return Response(serializer.data)
+            answers = Answer.objects.filter(question_id=question.id)
+            question_serializer = QuestionSerializer(question)
+            answer_serializer = AnswerSerializer(answers, many=True)
+            return Response(
+                {
+                    "question" : question_serializer.data,
+                    "answers" : answer_serializer.data
+                },
+                status = status.HTTP_200_OK
+            )
         except Question.DoesNotExist:
             return Response(
-                {"error": f"Вопроса с id={id} не найдено!"},
+                {"error": f"Вопрос id={id} не найден!"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Answer.DoesNotExist:
+            return Response(
+                {"error": "Ответов на данный вопрос не найдено."},
                 status=status.HTTP_404_NOT_FOUND
             )
 
