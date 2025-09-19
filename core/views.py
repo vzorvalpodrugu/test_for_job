@@ -111,3 +111,18 @@ class AnswerDetailView(APIView):
                 {"error": f"Ответ с id = {answer_id} не был найден."},
                 status=status.HTTP_404_NOT_FOUND
             )
+
+    @api_key_required
+    def delete(self, request, answer_id):
+        """
+        DELETE /answers/{id} — удалить ответ
+        """
+        try:
+            answer = Answer.objects.get(id=answer_id)
+            answer.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Answer.DoesNotExist:
+            return Response(
+                {"error": f"Ответ с id = {answer_id} не был найден."},
+                status=status.HTTP_404_NOT_FOUND
+            )
