@@ -1,21 +1,18 @@
+from functools import wraps
 from rest_framework import status
 from rest_framework.response import Response
-import json
 from Test.settings import X_API_KEY
 
-def check_api_key(api_key):
-    """Проверка валидности API-KEY"""
-    if api_key == X_API_KEY:
-        return api_key
-
 def api_key_required(view_func):
-    """Декоратор для проверки API-KEY"""
-    def wrapper(request):
+    """Декоратор для проверки API-KEY для методов класса"""
+    @wraps(view_func)
+    def wrapper(self, request, *args, **kwargs):
         api_key = request.headers.get('X-API-KEY')
-        if not api_key or not check_api_key(api_key):
+        if not api_key or api_key != X_API_KEY:
             return Response(
-                {"error" : "Неверный API-Ключ"},
-                status = status.HTTP_403_FORBIDDEN
+                {"error": "Неверный API-Ключ"},
+                status=status.HTTP_403_FORBIDDEN,
+                content_type='application/json; charset=utf-8'
             )
-        return view_func(request)
+        return view_func(self, request, *args, **kwargs)
     return wrapper
