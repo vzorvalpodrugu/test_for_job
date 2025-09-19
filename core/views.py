@@ -1,9 +1,10 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Question
-from core.serializers import QuestionSerializer
+from .models import Question, Answer
+from core.serializers import QuestionSerializer, AnswerSerializer
 from .utils import api_key_required
 
 class QuestionListView(APIView):
@@ -65,3 +66,24 @@ class QuestionDetailView(APIView):
                 {"error": "Вопроса с id={id} не найдено!"},
                 status=status.HTTP_404_NOT_FOUND
             )
+
+class AnswerCreateView(APIView):
+    @api_key_required
+    def post(self, request, id):
+        """
+        POST /questions/{id}/answers/ — добавить ответ к вопросу
+        """
+        try:
+            question = Question.objects.get(id=id)
+            serializer = AnswerSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(question_id = question ,user_id = User.objects.get(is_superuser=True))
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Question.DoesNotExist:
+            return Response(
+                {"error" : f"Вопрос с id = {id} не был найден"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
