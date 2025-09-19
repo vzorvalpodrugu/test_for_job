@@ -77,6 +77,10 @@ class AnswerCreateView(APIView):
             question = Question.objects.get(id=id)
             serializer = AnswerSerializer(data=request.data)
             if serializer.is_valid():
+                # Сейчас, как пользователя для ответа, будем использовать админа
+                # Когда это API будет внедряться, следующую строчку нужно заменить на
+                # serializer.save(question_id=question,
+                #                 user_id=request.user)
                 serializer.save(question_id = question ,user_id = User.objects.get(is_superuser=True))
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
