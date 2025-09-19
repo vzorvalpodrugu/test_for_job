@@ -84,10 +84,30 @@ class AnswerCreateView(APIView):
                 serializer.save(question_id = question ,user_id = User.objects.get(is_superuser=True))
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    serializer.errors,
+                    status=status.HTTP_400_BAD_REQUEST)
         except Question.DoesNotExist:
             return Response(
                 {"error" : f"Вопрос с id = {id} не был найден"},
                 status=status.HTTP_404_NOT_FOUND
             )
 
+class AnswerDetailView(APIView):
+    @api_key_required
+    def get(self, request, answer_id):
+        """
+        GET /answers/{id} — получить конкретный ответ
+        """
+        try:
+            answer = Answer.objects.get(id=answer_id)
+            serializer = AnswerSerializer(answer)
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+        except Answer.DoesNotExist:
+            return Response(
+                {"error": f"Ответ с id = {answer_id} не был найден."},
+                status=status.HTTP_404_NOT_FOUND
+            )
