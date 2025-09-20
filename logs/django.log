@@ -1,0 +1,10 @@
+INFO 2025-09-20 13:59:23,614 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:00:45,826 autoreload /app/core/views.py changed, reloading.
+INFO 2025-09-20 14:00:46,855 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:01:05,948 autoreload /app/core/views.py changed, reloading.
+INFO 2025-09-20 14:01:06,513 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 17:01:36,327 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:02:34,022 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:02:41,617 views POST /questions/ - создание вопроса. Данные: {'text': 'Почему люди ходят без шерсти, как кошки?'}
+INFO 2025-09-20 14:02:41,630 views Вопрос создан успешно. ID: 1
+INFO 2025-09-20 14:02:41,631 basehttp "POST /api/questions HTTP/1.1" 201 133
