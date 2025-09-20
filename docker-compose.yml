@@ -8,20 +8,23 @@ services:
     environment:
       POSTGRES_DB: test
       POSTGRES_USER: django_user
-      POSTGRES_PASSWORD: secure_password_123
+      POSTGRES_PASSWORD: admin123
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
-  # Django приложение
   web:
     build: .
     command: >
-      sh -c "python manage.py migrate &&
+      sh -c "while ! nc -z db 5432; do sleep 1; done;
+             python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     environment:
-      DATABASE_URL: postgres://django_user:secure_password_123@db:5432/test
+      DATABASE_URL: postgres://django_user:admin123@db:5432/test
+      POSTGRES_USER: django_user
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_HOST: db
     volumes:
       - .:/app
     ports:
