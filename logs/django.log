@@ -8,3 +8,141 @@ INFO 2025-09-20 14:02:34,022 autoreload Watching for file changes with StatReloa
 INFO 2025-09-20 14:02:41,617 views POST /questions/ - создание вопроса. Данные: {'text': 'Почему люди ходят без шерсти, как кошки?'}
 INFO 2025-09-20 14:02:41,630 views Вопрос создан успешно. ID: 1
 INFO 2025-09-20 14:02:41,631 basehttp "POST /api/questions HTTP/1.1" 201 133
+INFO 2025-09-20 14:15:39,269 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:28:31,835 autoreload /app/Test/settings.py changed, reloading.
+INFO 2025-09-20 14:28:32,493 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:41:58,701 autoreload /app/Test/urls.py changed, reloading.
+INFO 2025-09-20 14:41:59,445 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:42:25,897 views POST /questions/ - создание вопроса. Данные: {'text': 'New test question'}
+INFO 2025-09-20 14:42:25,900 views Вопрос создан успешно. ID: 1
+INFO 2025-09-20 14:42:25,908 views POST /questions/ - создание вопроса. Данные: {'text': ''}
+WARNING 2025-09-20 14:42:25,909 views Ошибка валидации вопроса: {'text': [ErrorDetail(string='This field may not be blank.', code='blank')]}
+WARNING 2025-09-20 14:42:25,912 log Bad Request: /api/questions/
+INFO 2025-09-20 14:42:25,920 views GET /questions/ - получение списка вопросов
+INFO 2025-09-20 14:42:25,921 views Найдено 0 вопросов
+INFO 2025-09-20 14:42:25,929 views GET /questions/ - получение списка вопросов
+INFO 2025-09-20 14:42:25,930 views Найдено 1 вопросов
+INFO 2025-09-20 14:42:25,947 views GET /questions/3 - получение вопроса с ответами
+INFO 2025-09-20 14:42:25,950 views Вопрос 3 найден. Ответов: 0
+INFO 2025-09-20 14:42:25,959 views GET /questions/999 - получение вопроса с ответами
+WARNING 2025-09-20 14:42:25,961 views Вопрос с id=999 не найден
+WARNING 2025-09-20 14:42:25,961 log Not Found: /api/questions/999/
+INFO 2025-09-20 14:42:25,968 views DELETE /questions/4 - удаление вопроса
+INFO 2025-09-20 14:42:25,973 views Вопрос 4 удален. Удалено ответов: 0
+INFO 2025-09-20 14:42:25,986 views POST /questions/5/answers/ - создание ответа. Данные: {'text': 'New test answer'}
+INFO 2025-09-20 14:42:25,994 views Ответ создан успешно. ID ответа: 1, вопрос: 5
+INFO 2025-09-20 14:42:26,001 views POST /questions/999/answers/ - создание ответа. Данные: {'text': 'New test answer'}
+WARNING 2025-09-20 14:42:26,003 views Попытка создания ответа для несуществующего вопроса id=999
+WARNING 2025-09-20 14:42:26,006 log Not Found: /api/questions/999/answers/
+INFO 2025-09-20 14:42:26,017 views GET /answers/2 - получение ответа
+INFO 2025-09-20 14:42:26,019 views Ответ 2 найден
+INFO 2025-09-20 14:42:26,031 views DELETE /answers/3 - удаление ответа
+INFO 2025-09-20 14:42:26,040 views Ответ 3 удален успешно
+WARNING 2025-09-20 14:42:26,046 log Forbidden: /api/questions/
+WARNING 2025-09-20 14:42:26,053 log Forbidden: /api/questions/
+INFO 2025-09-20 14:42:26,062 views GET /questions/ - получение списка вопросов
+INFO 2025-09-20 14:42:26,063 views Найдено 1 вопросов
+INFO 2025-09-20 14:43:04,476 basehttp "GET /api/questions/1 HTTP/1.1" 301 0
+INFO 2025-09-20 14:43:04,481 views GET /questions/1 - получение вопроса с ответами
+WARNING 2025-09-20 14:43:04,494 views Вопрос с id=1 не найден
+WARNING 2025-09-20 14:43:04,497 log Not Found: /api/questions/1/
+WARNING 2025-09-20 14:43:04,498 basehttp "GET /api/questions/1/ HTTP/1.1" 404 48
+ERROR 2025-09-20 14:43:09,081 log Internal Server Error: /api/questions
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.13/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+  File "/usr/local/lib/python3.13/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+    ...<9 lines>...
+    )
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/questions/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2025-09-20 14:43:09,083 basehttp "POST /api/questions HTTP/1.1" 500 62334
+INFO 2025-09-20 14:43:32,491 basehttp "GET /api/questions/1 HTTP/1.1" 301 0
+INFO 2025-09-20 14:43:32,496 views GET /questions/1 - получение вопроса с ответами
+WARNING 2025-09-20 14:43:32,508 views Вопрос с id=1 не найден
+WARNING 2025-09-20 14:43:32,508 log Not Found: /api/questions/1/
+WARNING 2025-09-20 14:43:32,511 basehttp "GET /api/questions/1/ HTTP/1.1" 404 48
+ERROR 2025-09-20 14:44:21,588 log Internal Server Error: /api/questions
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.13/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+  File "/usr/local/lib/python3.13/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+    ...<9 lines>...
+    )
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/questions/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2025-09-20 14:44:21,590 basehttp "POST /api/questions HTTP/1.1" 500 62334
+INFO 2025-09-20 14:46:04,269 autoreload Watching for file changes with StatReloader
+ERROR 2025-09-20 14:46:13,521 log Internal Server Error: /api/questions
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.13/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+  File "/usr/local/lib/python3.13/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+    ...<9 lines>...
+    )
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/questions/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2025-09-20 14:46:13,531 basehttp "POST /api/questions HTTP/1.1" 500 62334
+INFO 2025-09-20 14:46:53,453 autoreload /app/core/urls.py changed, reloading.
+INFO 2025-09-20 14:46:54,334 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:47:59,397 autoreload /app/core/urls.py changed, reloading.
+INFO 2025-09-20 14:47:59,946 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:48:22,439 autoreload /app/Test/settings.py changed, reloading.
+INFO 2025-09-20 14:48:23,048 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:49:19,129 autoreload Watching for file changes with StatReloader
+INFO 2025-09-20 14:49:44,140 views POST /questions/ - создание вопроса. Данные: {'text': 'Почему люди ходят без шерсти, как кошки?'}
+INFO 2025-09-20 14:49:44,155 views Вопрос создан успешно. ID: 1
+INFO 2025-09-20 14:49:44,156 basehttp "POST /api/questions HTTP/1.1" 201 133
+INFO 2025-09-20 14:49:52,697 views GET /questions/1 - получение вопроса с ответами
+INFO 2025-09-20 14:49:52,715 views Вопрос 1 найден. Ответов: 0
+INFO 2025-09-20 14:49:52,717 basehttp "GET /api/questions/1 HTTP/1.1" 200 159
+INFO 2025-09-20 14:49:56,870 views POST /questions/1/answers/ - создание ответа. Данные: {'text': 'Потому что люди произошли от лысых собак!'}
+INFO 2025-09-20 14:49:56,890 views Ответ создан успешно. ID ответа: 1, вопрос: 1
+INFO 2025-09-20 14:49:56,892 basehttp "POST /api/questions/1/answers HTTP/1.1" 201 148
+INFO 2025-09-20 14:49:59,281 views GET /questions/1 - получение вопроса с ответами
+INFO 2025-09-20 14:49:59,293 views Вопрос 1 найден. Ответов: 1
+INFO 2025-09-20 14:49:59,296 basehttp "GET /api/questions/1 HTTP/1.1" 200 307
+INFO 2025-09-20 14:50:40,307 views POST /questions/ - создание вопроса. Данные: {'text': 'New test question'}
+INFO 2025-09-20 14:50:40,309 views Вопрос создан успешно. ID: 1
+INFO 2025-09-20 14:50:40,318 views POST /questions/ - создание вопроса. Данные: {'text': ''}
+WARNING 2025-09-20 14:50:40,318 views Ошибка валидации вопроса: {'text': [ErrorDetail(string='This field may not be blank.', code='blank')]}
+WARNING 2025-09-20 14:50:40,321 log Bad Request: /api/questions
+INFO 2025-09-20 14:50:40,328 views GET /questions/ - получение списка вопросов
+INFO 2025-09-20 14:50:40,330 views Найдено 0 вопросов
+INFO 2025-09-20 14:50:40,340 views GET /questions/ - получение списка вопросов
+INFO 2025-09-20 14:50:40,341 views Найдено 1 вопросов
+INFO 2025-09-20 14:50:40,349 views GET /questions/3 - получение вопроса с ответами
+INFO 2025-09-20 14:50:40,352 views Вопрос 3 найден. Ответов: 0
+INFO 2025-09-20 14:50:40,362 views GET /questions/999 - получение вопроса с ответами
+WARNING 2025-09-20 14:50:40,363 views Вопрос с id=999 не найден
+WARNING 2025-09-20 14:50:40,364 log Not Found: /api/questions/999
+INFO 2025-09-20 14:50:40,373 views DELETE /questions/4 - удаление вопроса
+INFO 2025-09-20 14:50:40,376 views Вопрос 4 удален. Удалено ответов: 0
+INFO 2025-09-20 14:50:40,384 views POST /questions/5/answers/ - создание ответа. Данные: {'text': 'New test answer'}
+INFO 2025-09-20 14:50:40,392 views Ответ создан успешно. ID ответа: 1, вопрос: 5
+INFO 2025-09-20 14:50:40,403 views POST /questions/999/answers/ - создание ответа. Данные: {'text': 'New test answer'}
+WARNING 2025-09-20 14:50:40,426 views Попытка создания ответа для несуществующего вопроса id=999
+WARNING 2025-09-20 14:50:40,427 log Not Found: /api/questions/999/answers
+INFO 2025-09-20 14:50:40,437 views GET /answers/2 - получение ответа
+INFO 2025-09-20 14:50:40,439 views Ответ 2 найден
+INFO 2025-09-20 14:50:40,449 views DELETE /answers/3 - удаление ответа
+INFO 2025-09-20 14:50:40,451 views Ответ 3 удален успешно
+WARNING 2025-09-20 14:50:40,458 log Forbidden: /api/questions
+WARNING 2025-09-20 14:50:40,464 log Forbidden: /api/questions
+INFO 2025-09-20 14:50:40,474 views GET /questions/ - получение списка вопросов
+INFO 2025-09-20 14:50:40,475 views Найдено 1 вопросов

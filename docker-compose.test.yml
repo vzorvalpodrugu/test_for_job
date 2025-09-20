@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db_test:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: test_test
+      POSTGRES_USER: django_user_test
+      POSTGRES_PASSWORD: admin123_test
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U django_user_test -d test_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web_test:
+    build: .
+    command: >
+      sh -c "while ! nc -z db_test 5432; do sleep 1; done;
+             python manage.py migrate &&
+             python -m pytest tests/ -v"
+    environment:
+      POSTGRES_HOST: db_test
+      POSTGRES_DB: test_test
+      POSTGRES_USER: django_user_test
+      POSTGRES_PASSWORD: admin123_test
+      POSTGRES_PORT: 5432
+      X_API_KEY: test-api-key-123
+    volumes:
+      - .:/app
+    depends_on:
+      db_test:
+        condition: service_healthy

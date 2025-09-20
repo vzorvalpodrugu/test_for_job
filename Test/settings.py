@@ -8,6 +8,7 @@ X_API_KEY = os.getenv("X-API-KEY")
 admin_password = os.getenv("admin_password")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+APPEND_SLASH = False
 
 LOGGING = {
     'version': 1,
@@ -48,6 +49,19 @@ LOGGING = {
         },
     },
 }
+
+# Настройки для тестовой базы данных
+if os.environ.get('POSTGRES_DB', '').endswith('_test'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_DB', 'test_test'),
+            'USER': os.environ.get('POSTGRES_USER', 'django_user_test'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'admin123_test'),
+            'HOST': os.environ.get('POSTGRES_HOST', 'db_test'),
+            'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        }
+    }
 
 # Создаем папку для логов если ее нет
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
